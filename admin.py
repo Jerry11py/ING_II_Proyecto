@@ -69,3 +69,21 @@ def delete_user(user_id):
     conn.close()
 
     return redirect(url_for('admin.dashboard_users'))
+
+# productos ruta
+@admin_bp.route('/admin/productos')
+def admin_productos():
+    if session.get('role') != 'admin':
+        return redirect(url_for('auth.login'))
+
+    from db_config import get_db_connection
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    cursor.execute("SELECT * FROM Producto")
+    productos = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    return render_template('admin_productos.html', productos=productos)

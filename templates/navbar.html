@@ -1,0 +1,10 @@
+<div class="top-bar">
+    {% if session['role'] == 'admin' %}
+      <a href="{{ url_for('admin.dashboard') }}" class="action-button">🏠 Menú Admin</a>
+    {% elif session['role'] == 'user' %}
+      <a href="{{ url_for('user.user_menu') }}" class="action-button">🏠 Menú Usuario</a>
+    {% endif %}
+    
+    <a href="{{ url_for('auth.logout') }}" class="action-button edit-button">🚪 Cerrar Sesión</a>
+  </div>
+  

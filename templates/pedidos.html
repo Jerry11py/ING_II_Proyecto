@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mis Pedidos</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  {% include 'navbar.html' %}
+
+  <div class="grid-wrapper">
+    <h2 class="login-heading" style="text-align: center;">🧾 Mis Pedidos</h2>
+
+    {% if pedidos %}
+      <div class="product-grid">
+        {% for id, pedido in pedidos.items() %}
+          <div class="product-card">
+            <h3>Pedido #{{ id }}</h3>
+            <p><strong>Fecha:</strong> {{ pedido.fecha }}</p>
+            <p><strong>Método de Pago:</strong> {{ pedido.metodo }}</p>
+            <p><strong>Total:</strong> ${{ '%.2f'|format(pedido.total) }}</p>
+
+            {% if pedido.detalle %}
+              <h4>Detalles del Pago:</h4>
+              <ul>
+                <li><strong>Tipo:</strong> {{ pedido.detalle.tipo|capitalize }}</li>
+                <li><strong>Referencia:</strong> {{ pedido.detalle.referencia }}</li>
+                {% if pedido.detalle.notas %}
+                  <li><strong>Notas:</strong> {{ pedido.detalle.notas }}</li>
+                {% endif %}
+              </ul>
+            {% endif %}
+
+            <h4>Productos:</h4>
+            <ul>
+              {% for prod in pedido.productos %}
+                <li>{{ prod.nombre }} (x{{ prod.cantidad }}) – ${{ '%.2f'|format(prod.subtotal) }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p style="text-align: center;">No tienes pedidos registrados aún.</p>
+    {% endif %}
+  </div>
+</body>
+</html>

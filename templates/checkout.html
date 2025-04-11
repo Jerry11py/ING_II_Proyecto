@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Finalizar Compra</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script>
+    function mostrarCampos(nombre) {
+      document.getElementById('card-fields').style.display = nombre.includes("Tarjeta") ? 'block' : 'none';
+      document.getElementById('transfer-fields').style.display = nombre.includes("Transferencia") ? 'block' : 'none';
+      document.getElementById('paypal-fields').style.display = nombre.includes("PayPal") ? 'block' : 'none';
+    }
+
+    function onMetodoChange() {
+      const select = document.getElementById('metodo_pago_select');
+      const selectedText = select.options[select.selectedIndex].text;
+      mostrarCampos(selectedText);
+    }
+
+    window.onload = function () {
+      onMetodoChange();
+    };
+  </script>
+</head>
+<body>
+  <div class="login-container">
+    {% include 'navbar.html' %}
+    <div class="login-box">
+      <h2 class="login-heading">Finalizar Compra</h2>
+
+      <form method="POST">
+        <label>Método de Pago:</label>
+        <select id="metodo_pago_select" name="metodo_pago" onchange="onMetodoChange()" required>
+          {% for metodo in metodos_pago %}
+            <option value="{{ metodo.id_metodo_pago }}">{{ metodo.nombre }}</option>
+          {% endfor %}
+        </select>
+
+        <!-- Campos para tarjeta -->
+        <div id="card-fields" style="display:none;">
+          <label>Nombre en la Tarjeta:</label>
+          <input type="text" name="card_name">
+          <label>Número de Tarjeta:</label>
+          <input type="text" name="card_number">
+        </div>
+
+        <!-- Campos para transferencia -->
+        <div id="transfer-fields" style="display:none;">
+          <label>Número de Transferencia:</label>
+          <input type="text" name="transfer_id">
+        </div>
+
+        <!-- Campos para PayPal -->
+        <div id="paypal-fields" style="display:none;">
+          <label>Correo de PayPal:</label>
+          <input type="email" name="paypal_email">
+        </div>
+
+        <label>Notas adicionales:</label>
+        <textarea name="notas" rows="3" style="width:100%;"></textarea>
+
+        <button type="submit" class="action-button">Confirmar Pedido</button>
+      </form>
+
+      <br>
+      <a href="{{ url_for('shop.view_cart') }}" class="action-button edit-button">Volver al Carrito</a>
+    </div>
+  </div>
+</body>
+</html>
