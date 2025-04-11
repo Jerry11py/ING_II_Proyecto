@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <div class="login-container">
+      <div class="login-box">
+        <h2 class="login-heading">Registrarse</h2>
+  
+        <form method="POST">
+            <label>Nombre:</label>
+            <input type="text" name="nombre" required>
+  
+            <label>Correo electrónico:</label>
+            <input type="email" name="email" required>
+  
+            <label>Teléfono:</label>
+            <input type="text" name="telefono" required>
+  
+            <label>Dirección:</label>
+            <input type="text" name="direccion" required>
+  
+            <label>Contraseña:</label>
+            <input type="password" name="password" required>
+  
+            <button type="submit" class="action-button">Registrarse</button>
+        </form>
+  
+        <p style="margin-top: 10px;">
+          <small>¿Ya tienes una cuenta? <a href="{{ url_for('auth.login') }}">Iniciar sesión aquí</a></small>
+        </p>
+      </div>
+    </div>
+  </body>
+  
+  
+</html>

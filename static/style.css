@@ -1,0 +1,223 @@
+:root {
+    --light-cyan: #d1faff;
+    --light-blue: #9bd1e5;
+    --air-force-blue: #6a8eae;
+    --jade: #57a773;
+    --dark-spring-green: #157145;
+  }
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--light-cyan);
+    color: var(--dark-spring-green);
+    padding: 30px;
+    margin: 0;
+  }
+  
+  h2 {
+    color: var(--dark-spring-green);
+  }
+  
+  a {
+    color: var(--air-force-blue);
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  form {
+    background: none;
+    border: none;
+    padding: 20px;
+    /*background: white;
+    padding: 20px;
+    border: 1px solid var(--light-blue);
+    border-radius: 8px;
+    max-width: 400px;
+    margin-bottom: 20px;*/
+  }
+  
+  input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    margin-bottom: 15px;
+    border: 1px solid var(--light-blue);
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  button {
+    background-color: var(--jade);
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: var(--dark-spring-green);
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+  }
+  
+  th, td {
+    border: 1px solid var(--light-blue);
+    padding: 10px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: var(--light-blue);
+    color: var(--dark-spring-green);
+  }
+  
+/* shop-htmml */
+
+body { font-family: Arial, sans-serif; padding: 20px; }
+h2 { color: #333; }
+.product {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+.product h3 {
+    margin-top: 0;
+}
+.buy-button {
+    background-color: #28a745;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.buy-button:hover {
+    background-color: #218838;
+}
+
+/* product */ 
+.product {
+    border: 1px solid var(--light-blue);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .product h3 {
+    margin-top: 0;
+    color: var(--air-force-blue);
+  }
+  
+  .buy-button {
+    background-color: var(--jade);
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .buy-button:hover {
+    background-color: var(--dark-spring-green);
+  }
+  
+  /* Smaller buttons inside tables */
+td form {
+    display: inline;
+    border: none;
+    padding: 0;
+    margin: 0;
+    background: none;
+    box-shadow: none;
+  }
+  
+  td form button {
+    width: auto;
+    padding: 6px 12px;
+    font-size: 14px;
+    margin-left: 8px;
+  }
+  
+  .edit-link {
+    color: var(--air-force-blue);
+    font-weight: bold;
+  }
+  
+
+  /* buttons */
+
+  .action-button {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 6px;
+    background-color: var(--jade);
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 14px;
+    margin-right: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .action-button:hover {
+    background-color: var(--dark-spring-green);
+  }
+  
+  .edit-button {
+    background-color: var(--air-force-blue);
+  }
+  
+  .edit-button:hover {
+    background-color: var(--jade);
+  }
+  
+  .delete-button {
+    background-color: var(--jade);
+  }
+  
+  .delete-button:hover {
+    background-color: var(--dark-spring-green);
+  }
+  
+  /* Center the login container */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  
+  /* Optional: style the login heading */
+  .login-heading {
+    margin-bottom: 20px;
+    color: var(--dark-spring-green);
+    font-size: 28px;
+    text-align: center;
+  }
+  
+  .login-box {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 10px;
+    border: 1px solid var(--light-blue);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 400px; /* Controls width */
+    box-sizing: border-box;
+    text-align: center;
+  }

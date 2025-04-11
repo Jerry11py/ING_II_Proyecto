@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Panel de Administrador</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-box">
+      <h2 class="login-heading">👑 Panel de Administrador</h2>
+
+      <a href="{{ url_for('admin.dashboard_users') }}" class="action-button">🔧 Editar Usuarios</a><br><br>
+      <a href="#" class="action-button">📦 Editar Productos</a><br><br>
+
+      <a href="{{ url_for('auth.logout') }}" class="action-button edit-button">Cerrar sesión</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <h2>Panel de Administrador</h2>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Correo electrónico</th>
+          <th>Rol</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+          <tr>
+            <td>{{ user.id_cliente }}</td>
+            <td>{{ user.nombre }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.rol }}</td>
+            <td>
+              {% if user.rol != 'admin' %}
+                <a href="{{ url_for('admin.edit_user', user_id=user.id_cliente) }}" class="action-button edit-button">Editar</a>
+                <form method="POST" action="{{ url_for('admin.delete_user', user_id=user.id_cliente) }}" style="display:inline;" onsubmit="return confirm('¿Eliminar este usuario?');">
+                  <button type="submit" class="action-button delete-button">Eliminar</button>
+                </form>
+              {% else %}
+                <em>Admin</em>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  
+    <br>
+    <a href="{{ url_for('auth.logout') }}">Cerrar sesión</a>
+  </body>
+  
+</html>

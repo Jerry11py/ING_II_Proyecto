@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Menú de Usuario</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-box">
+      <h2 class="login-heading">👤 Menú de Usuario</h2>
+
+      <a href="{{ url_for('shop.shop_home') }}" class="action-button">🛍️ Ver Tienda</a><br><br>
+      <a href="{{ url_for('shop.view_cart') }}" class="action-button">🛒 Ver Carrito</a><br><br>
+
+      <a href="{{ url_for('auth.logout') }}" class="action-button edit-button">Cerrar sesión</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit User</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="login-container">
+      <div class="login-box">
+        <h2 class="login-heading">Editar Usuario</h2>
+  
+        <form method="POST">
+          <label>Nombre:</label>
+          <input type="text" name="nombre" value="{{ user.nombre }}" required>
+  
+          <label>Correo electrónico:</label>
+          <input type="email" name="email" value="{{ user.email }}" required>
+  
+          <label>Rol:</label>
+          <select name="rol">
+            <option value="user" {% if user.rol == 'user' %}selected{% endif %}>Usuario</option>
+            <option value="admin" {% if user.rol == 'admin' %}selected{% endif %}>Administrador</option>
+          </select>
+  
+          <button type="submit" class="action-button">Guardar cambios</button>
+        </form>
+  
+        <p style="margin-top: 10px;">
+          <a href="{{ url_for('admin.dashboard') }}">← Volver al panel</a>
+        </p>
+      </div>
+    </div>
+  </body>
+  
+  
+</html>
