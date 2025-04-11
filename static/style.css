@@ -284,7 +284,34 @@ td form {
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   }
-  
-/* pedido css */
+ 
 
+  /* ho , admin productos */
+  .product-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .product-actions a,
+  .product-actions button {
+    display: inline-block;
+    padding: 10px 18px;
+    font-size: 14px;
+    border-radius: 8px;
+    text-align: center;
+    white-space: nowrap;
+    width: auto;
+    height: auto;
+    line-height: 1.2;
+  }
+  
+  /* Ensure the form doesn’t block layout */
+  .product-actions form {
+    display: inline;
+    margin: 0;
+    padding: 0;
+  }
   

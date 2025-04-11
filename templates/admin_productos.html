@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gestión de Productos</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    .add-product-button {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 20px;
+    }
+
+    .add-product-button .action-button {
+      padding: 10px 20px;
+      font-size: 14px;
+      border-radius: 10px;
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .product-actions form {
+      margin: 0;
+    }
+
+    .product-actions .action-button,
+    .product-actions .edit-button {
+      padding: 10px 20px;
+      font-size: 14px;
+      border-radius: 8px;
+      white-space: nowrap;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  {% include 'navbar.html' %}
+
+  <div class="grid-wrapper">
+    <h2 class="login-heading" style="text-align: center;">🛠️ Gestión de Productos</h2>
+
+    <!-- Botón Agregar Producto flotado a la derecha -->
+    <div class="add-product-button">
+      <a href="{{ url_for('admin.gestionar_producto') }}" class="action-button">➕ Agregar Producto</a>
+    </div>
+
+    {% if productos %}
+      <div class="product-grid">
+        {% for producto in productos %}
+          <div class="product-card">
+            <h3>{{ producto.nombre }}</h3>
+            <p>{{ producto.descripcion }}</p>
+            <p><strong>Precio:</strong> ${{ producto.precio }}</p>
+            <p><strong>Stock:</strong> {{ producto.stock }}</p>
+
+            <div class="product-actions">
+              <a href="{{ url_for('admin.gestionar_producto', id=producto.id_producto) }}" class="action-button">✏️ Editar</a>
+
+              <form method="POST" action="{{ url_for('admin.eliminar_producto', id=producto.id_producto) }}">
+                <button type="submit" class="action-button edit-button" onclick="return confirm('¿Estás seguro de que deseas eliminar este producto?')">
+                  🗑️ Eliminar
+                </button>
+              </form>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p style="text-align: center;">No hay productos registrados aún.</p>
+    {% endif %}
+  </div>
+</body>
+</html>

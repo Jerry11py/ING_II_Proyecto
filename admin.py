@@ -87,3 +87,63 @@ def admin_productos():
     conn.close()
 
     return render_template('admin_productos.html', productos=productos)
+
+#editar productos / gestionar productos 
+# 
+
+@admin_bp.route('/admin/productos/gestionar', methods=['GET', 'POST'])
+@admin_bp.route('/admin/productos/gestionar/<int:id>', methods=['GET', 'POST'])
+def gestionar_producto(id=None):
+    if session.get('role') != 'admin':
+        return redirect(url_for('auth.login'))
+
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    if request.method == 'POST':
+        nombre = request.form['nombre']
+        descripcion = request.form['descripcion']
+        precio = float(request.form['precio'])
+        stock = int(request.form['stock'])
+
+        if id:  # EDIT
+            cursor.execute("""
+                UPDATE Producto
+                SET nombre = %s, descripcion = %s, precio = %s, stock = %s
+                WHERE id_producto = %s
+            """, (nombre, descripcion, precio, stock, id))
+        else:  # NEW
+            cursor.execute("""
+                INSERT INTO Producto (nombre, descripcion, precio, stock)
+                VALUES (%s, %s, %s, %s)
+            """, (nombre, descripcion, precio, stock))
+
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return redirect(url_for('admin.admin_productos'))
+
+    # GET request
+    producto = None
+    if id:
+        cursor.execute("SELECT * FROM Producto WHERE id_producto = %s", (id,))
+        producto = cursor.fetchone()
+
+    cursor.close()
+    conn.close()
+    return render_template('gestionar_producto.html', producto=producto)
+
+
+@admin_bp.route('/admin/productos/eliminar/<int:id>', methods=['POST'])
+def eliminar_producto(id):
+    if session.get('role') != 'admin':
+        return redirect(url_for('auth.login'))
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM Producto WHERE id_producto = %s", (id,))
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+    return redirect(url_for('admin.admin_productos'))
