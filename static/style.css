@@ -315,3 +315,16 @@ td form {
     padding: 0;
   }
   
+/* add user */ 
+  .add-user-button {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px 0;
+  }
+  
+  .add-user-button .action-button {
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+  

@@ -8,7 +8,10 @@
 <body>
     {% include 'navbar.html' %}
     <h2>Panel de Administrador</h2>
-  
+    <div class="add-user-button">
+      <a href="{{ url_for('admin.crear_usuario') }}" class="action-button">➕ Agregar Usuario</a>
+    </div>
+    
     <table>
       <thead>
         <tr>

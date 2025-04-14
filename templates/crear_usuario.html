@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Agregar Usuario</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  {% include 'navbar.html' %}
+  
+  <div class="login-container">
+    <div class="login-box">
+      <h2 class="login-heading">➕ Agregar Usuario</h2>
+
+      <!-- Form to add a user -->
+      <form method="POST">
+        <label>Nombre de Usuario:</label>
+        <input type="text" name="nombre" placeholder="Ingrese el nombre de usuario" required>
+
+        <label>Correo Electrónico:</label>
+        <input type="email" name="email" placeholder="Ingrese el correo electrónico" required>
+
+        <label>Teléfono:</label>
+        <input type="text" name="telefono" placeholder="Ingrese el teléfono" required>
+
+        <label>Dirección:</label>
+        <input type="text" name="direccion" placeholder="Ingrese la dirección" required>
+
+        <label>Contraseña:</label>
+        <input type="password" name="contraseña" placeholder="Ingrese la contraseña" required>
+
+        <label>Rol:</label>
+        <select name="rol">
+          <option value="admin">Administrador</option>
+          <option value="user">Usuario</option>
+        </select>
+
+        <button type="submit" class="action-button">Guardar Usuario</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

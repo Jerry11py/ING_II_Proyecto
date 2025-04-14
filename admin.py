@@ -147,3 +147,38 @@ def eliminar_producto(id):
     conn.close()
 
     return redirect(url_for('admin.admin_productos'))
+
+
+# crear usuario
+# crear usuario
+@admin_bp.route('/admin/usuarios/crear', methods=['GET', 'POST'])
+def crear_usuario():
+    if session.get('role') != 'admin':
+        return redirect(url_for('auth.login'))
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    if request.method == 'POST':
+        # Collect form data
+        nombre = request.form['nombre']
+        email = request.form['email']
+        telefono = request.form['telefono']
+        direccion = request.form['direccion']
+        contraseña = request.form['contraseña']
+        rol = request.form['rol']
+
+        # Insert into 'Cliente' table
+        cursor.execute("""
+            INSERT INTO Cliente (nombre, email, telefono, direccion, contraseña, rol)
+            VALUES (%s, %s, %s, %s, %s, %s)
+        """, (nombre, email, telefono, direccion, contraseña, rol))
+
+        conn.commit()
+        cursor.close()
+        conn.close()
+
+        return redirect(url_for('admin.dashboard_users'))  # Redirect to user dashboard
+
+    return render_template('crear_usuario.html')
+
