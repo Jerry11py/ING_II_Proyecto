@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    :root {
+      --light-cyan: #d1faff;
+      --light-blue: #9bd1e5;
+      --air-force-blue: #c9d5e0;
+      --jade: #57a773;
+      --dark-spring-green: #157145;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 30px;
+      background-color: var(--light-cyan);
+      color: #333;
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--air-force-blue);
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      color: var(--jade);
+      border-bottom: 2px solid var(--light-blue);
+      padding-bottom: 5px;
+    }
+
+    p, li {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    strong {
+      font-weight: bold;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 10px 0;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    .pedido-details {
+      margin-top: 20px;
+    }
+
+    .pedido-header {
+      background-color: var(--dark-spring-green);
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .pedido-info {
+      margin-top: 20px;
+      background-color: var(--light-blue);
+      padding: 15px;
+      border-radius: 5px;
+      border: 1px solid var(--air-force-blue);
+    }
+
+    .pedido-info p {
+      margin: 5px 0;
+    }
+
+    .product-list {
+      margin-top: 20px;
+      border: 1px solid var(--air-force-blue);
+      border-radius: 5px;
+      padding: 10px;
+      background-color: #fff;
+    }
+
+    .product-list h3 {
+      margin-top: 0;
+    }
+
+    .product-list ul {
+      margin-top: 10px;
+    }
+
+    .product-list li {
+      padding: 5px 0;
+      border-bottom: 1px solid #f1f1f1;
+    }
+
+    .footer {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--dark-spring-green);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="pedido-header">
+    <h2>Resumen del Pedido {{ pedido.id }}</h2>
+  </div>
+
+  <div class="pedido-info">
+    <!-- <p><strong>Fecha:</strong> {{ pedido.fecha }}</p> -->
+    <p><strong>Método de Pago:</strong> {{ pedido.metodo }}</p>
+    <p><strong>Total:</strong> ${{ '%.2f'|format(pedido.total) }}</p>
+  </div>
+
+  <div class="pedido-details">
+    <h3>Productos:</h3>
+    <div class="product-list">
+      <ul>
+        {% for prod in pedido.productos %}
+          <li>
+            <strong>{{ prod.nombre }}</strong> (x{{ prod.cantidad }}) – ${{ '%.2f'|format(prod.subtotal) }}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  {% if pedido.detalle %}
+    <div class="pedido-details">
+      <h3>Detalle de Pago:</h3>
+      <ul>
+        <li><strong>Tipo:</strong> {{ pedido.detalle.tipo }}</li>
+        <li><strong>Referencia:</strong> {{ pedido.detalle.referencia }}</li>
+        {% if pedido.detalle.notas %}
+          <li><strong>Notas:</strong> {{ pedido.detalle.notas }}</li>
+        {% endif %}
+      </ul>
+    </div>
+  {% endif %}
+
+  <div class="footer">
+    <p>Este es un resumen generado automáticamente para el pedido {{ pedido.id }}.</p>
+  </div>
+
+</body>
+</html>

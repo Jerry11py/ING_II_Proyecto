@@ -328,3 +328,43 @@ td form {
     border-radius: 8px;
   }
   
+
+
+/* 
+  /* test fix! */
+
+  /* Ensure the body and html are stretched to full height */
+/*html, body {
+  /*height: 100%;
+  /*margin: 0;
+  /*padding: 0;
+  /*display: flex;
+  /*justify-content: center;
+  /*align-items: center;
+  /*flex-direction: column; /* Optional: Align elements vertically */
+/*}
+
+
+/* Ensure login container takes up available height */
+/*.login-container {
+  /*display: flex;
+  /*flex-direction: column;
+  /*justify-content: center;
+  /*align-items: center;
+  /*height: 100%; /* Take up full height */
+  /*min-height: 100vh; /* Minimum height is the viewport height */
+  /*padding: 20px; /* Adjust padding as needed */
+/*}
+
+/* Optional: Center the form inside the box */
+/*.login-box {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 10px;
+  border: 1px solid var(--light-blue);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 400px; /* Set a max width */
+  /*text-align: center;
+  box-sizing: border-box;
+} */

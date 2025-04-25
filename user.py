@@ -1,4 +1,8 @@
 from flask import Blueprint, render_template, session, redirect, url_for
+from weasyprint import HTML
+from db_config import get_db_connection
+from flask import Response
+
 
 user_bp = Blueprint('user', __name__)
 
@@ -71,3 +75,56 @@ def user_pedidos():
     conn.close()
 
     return render_template('pedidos.html', pedidos=pedidos)
+
+@user_bp.route('/usuario/pedido/<int:pedido_id>/descargar-pdf')
+def descargar_pedido_pdf(pedido_id):
+    # Retrieve the pedido details using the pedido_id
+    pedido = obtener_pedido_por_id(pedido_id)
+    
+    # Use WeasyPrint to generate the PDF
+    html_content = render_template('pdf/descargar_pedido_pdf.html', pedido=pedido)
+    pdf = HTML(string=html_content).write_pdf()
+
+    # Return the PDF as a response
+    return Response(pdf, mimetype='application/pdf', headers={'Content-Disposition': f'attachment; filename="pedido_{pedido_id}.pdf"'})
+
+def obtener_pedido_por_id(pedido_id):
+    from db_config import get_db_connection
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    cursor.execute("""
+        SELECT p.id_pedido, p.fecha_pedido, p.total, mp.nombre AS metodo, c.id_carrito
+        FROM Pedido p
+        JOIN Metodo_Pago mp ON p.id_metodo_pago = mp.id_metodo_pago
+        JOIN Carrito c ON p.id_carrito = c.id_carrito
+        WHERE p.id_pedido = %s
+    """, (pedido_id,))
+    
+    pedido = cursor.fetchone()
+
+    if pedido:
+        pedido['productos'] = []
+        cursor.execute("""
+            SELECT p.nombre, p.descripcion, p.precio, cp.cantidad, (p.precio * cp.cantidad) AS subtotal
+            FROM Producto p
+            JOIN Carrito_Producto cp ON p.id_producto = cp.id_producto
+            WHERE cp.id_carrito = %s
+        """, (pedido['id_carrito'],))
+        
+        pedido['productos'] = cursor.fetchall()
+
+        cursor.execute("""
+            SELECT tipo, referencia, notas
+            FROM Pago_Detalle
+            WHERE id_pedido = %s
+        """, (pedido_id,))
+        
+        pedido['detalle'] = cursor.fetchone()
+
+    cursor.close()
+    conn.close()
+
+    return pedido
+
+

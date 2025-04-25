@@ -15,10 +15,17 @@
         {% for id, pedido in pedidos.items() %}
           <div class="product-card">
             <h3>Pedido #{{ id }}</h3>
-            <p><strong>Fecha:</strong> {{ pedido.fecha }}</p>
+            <!-- <p><strong>Fecha:</strong> {{ pedido.fecha }}</p> -->
             <p><strong>Método de Pago:</strong> {{ pedido.metodo }}</p>
             <p><strong>Total:</strong> ${{ '%.2f'|format(pedido.total) }}</p>
 
+            <!-- templates/pedidos.html -->
+            <a href="{{ url_for('user.descargar_pedido_pdf', pedido_id=id) }}" class="action-button" target="_blank">
+              Descargar PDF
+            </a>
+            
+
+            
             {% if pedido.detalle %}
               <h4>Detalles del Pago:</h4>
               <ul>
